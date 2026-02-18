@@ -10,7 +10,9 @@
 //Function Prototypes
 void DisplayIntro();
 int GetUserChoice();
+int GenerateComputerChoice();
 std::string choice_to_string(int choice);
+void DetermineWinner(int, int );
 
 using namespace std;
 
@@ -20,12 +22,26 @@ const int SCISSORS = 3;
 
 int main()
 {
-    srand(static_cast<unsigned int>(time(0)));
+    char playAgain;
 
-    DisplayIntro();
+    do
+    {
+        srand(static_cast<unsigned int>(time(0)));
 
-    int UserChoice = GetUserChoice();
+        DisplayIntro();
 
+        int UserChoice = GetUserChoice();
+        int ComputerChoice = GenerateComputerChoice();
+
+        cout << "you chose: " << choice_to_string(UserChoice) << endl;
+        cout << "computer chose: " << choice_to_string(ComputerChoice) << endl;
+
+        DetermineWinner(UserChoice, ComputerChoice);
+
+        cout << "Would you like to play again? (Y/N): ";
+        cin >> playAgain;
+
+    } while (playAgain == 'Y' || playAgain == 'y');
 
     return 0;
 }
@@ -45,18 +61,30 @@ int GetUserChoice()
     int choice;
     while (true) 
     {
-        cout << "enter your choice. (1-3): ";
-        if (choice >= 1 && choice <= 3)
+        cout << "Enter your choice (1-3): ";
+        if (!(cin >> choice)) 
+        {
+            cout << "Invalid input. Please enter a number." << std::endl;
+            cin.clear(); // Clear error flags
+            cin.ignore(10000, '\n'); // Discard invalid input
+        }
+        else if (choice >= 1 && choice <= 3) 
         {
             break;
         }
         else 
         {
-            cout << "invalid input. Please choose 1, 2, or 3." << endl;
+            cout << "Invalid choice. Please choose 1, 2, or 3." << std::endl;
         }
     }
     return choice;
 }
+
+int GenerateComputerChoice()
+{
+    return (rand() % 3) + 1;
+}
+
 
  std::string choice_to_string(int choice) {
     if (choice == ROCK) return "Rock";
@@ -65,6 +93,23 @@ int GetUserChoice()
     return "Unknown";
 }
 
+ void DetermineWinner(int user, int computer)
+ {
+     if (user == computer)
+     {
+         cout << "it's a tie" << endl;
+     }
+     else if ((user == ROCK && computer == SCISSORS) ||
+              (user == PAPER && computer == ROCK) ||
+              (user == SCISSORS && computer == PAPER))
+     {
+         cout << "You win!" << endl;
+     }
+     else
+     {
+         cout << "Computer wins!" << endl;
+     }
+ }
 
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
