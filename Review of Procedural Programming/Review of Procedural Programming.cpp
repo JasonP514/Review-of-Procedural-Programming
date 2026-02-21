@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
-#include < ctime>
+
 
 
 //Function Prototypes
@@ -23,7 +23,6 @@ const int SCISSORS = 3;
 int main()
 {
     char playAgain;
-
     do
     {
         srand(static_cast<unsigned int>(time(0)));
@@ -41,7 +40,8 @@ int main()
         cout << "Would you like to play again? (Y/N): ";
         cin >> playAgain;
 
-    } while (playAgain == 'Y' || playAgain == 'y');
+    }
+    while (playAgain == 'Y' || playAgain == 'y');
 
     return 0;
 }
@@ -65,8 +65,8 @@ int GetUserChoice()
         if (!(cin >> choice)) 
         {
             cout << "Invalid input. Please enter a number." << std::endl;
-            cin.clear(); // Clear error flags
-            cin.ignore(10000, '\n'); // Discard invalid input
+            cin.clear();
+            cin.ignore(10000, '\n');
         }
         else if (choice >= 1 && choice <= 3) 
         {
