@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="Review of Procedural Programming/Review of Procedural Programming.vcxproj" />
+  <Project Path="Review of Procedural Programming/Review of Procedural Programming.vcxproj" Id="178ea79c-f4c4-4fa8-821d-43d936b731c3" />
 </Solution>
