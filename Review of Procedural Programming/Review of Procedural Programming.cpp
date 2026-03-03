@@ -9,23 +9,23 @@
 using namespace std;
 
 // Constants for array limits and grading scale
-const int MAX_STUDENTS = 100;
-const int NUM_TESTS = 5;
+const int MAXSTUDENTS = 10;
+const int NUMTESTS = 5;
 
 // Function Prototypes
-int loadData(string names[], double scores[][NUM_TESTS], string filename);
+int readData(string names[], double scores[][NUMTESTS], string filename);
 char calculateGrade(double average);
-void displayReport(const string names[], const double scores[][NUM_TESTS], int count);
+void Print(const string names[], const double scores[][NUMTESTS], int count);
 
 int main() {
-    string names[MAX_STUDENTS];
-    double scores[MAX_STUDENTS][NUM_TESTS];
+    string names[MAXSTUDENTS];
+    double scores[MAXSTUDENTS][NUMTESTS];
     string filename = "studentgrades.txt";
 
-    int studentCount = loadData(names, scores, filename);
+    int studentCount = readData(names, scores, filename);
 
     if (studentCount > 0) {
-        displayReport(names, scores, studentCount);
+        Print(names, scores, studentCount);
     }
     else {
         cout << "No data found or file error." << endl;
@@ -34,14 +34,16 @@ int main() {
     return 0;
 }
 
+
+//Function Declarations
 // Reads data into parallel arrays and returns the actual count
-int loadData(string names[], double scores[][NUM_TESTS], string filename) {
+int readData(string names[], double scores[][NUMTESTS], string filename) {
     ifstream inFile(filename);
     if (!inFile) return 0;
 
     int count = 0;
-    while (count < MAX_STUDENTS && inFile >> names[count]) {
-        for (int j = 0; j < NUM_TESTS; j++) {
+    while (count < MAXSTUDENTS && inFile >> names[count]) {
+        for (int j = 0; j < NUMTESTS; j++) {
             inFile >> scores[count][j];
         }
         count++;
@@ -60,22 +62,23 @@ char calculateGrade(double average) {
 }
 
 // Formats and displays the final grade report
-void displayReport(const string names[], const double scores[][NUM_TESTS], int count) {
+void Print(const string names[], const double scores[][NUMTESTS], int count) {
     cout << left << setw(15) << "Name" << setw(10) << "Average" << "Grade" << endl;
     cout << "-----------------------------------" << endl;
 
     for (int i = 0; i < count; i++) {
         double sum = 0;
-        for (int j = 0; j < NUM_TESTS; j++) {
+        for (int j = 0; j < NUMTESTS; j++) {
             sum += scores[i][j];
         }
-        double avg = sum / NUM_TESTS;
+        double avg = sum / NUMTESTS;
 
         cout << left << setw(15) << names[i]
             << setw(10) << fixed << setprecision(2) << avg
             << calculateGrade(avg) << endl;
     }
 }
+
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
 
