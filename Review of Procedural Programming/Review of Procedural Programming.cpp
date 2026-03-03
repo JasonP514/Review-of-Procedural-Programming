@@ -37,13 +37,16 @@ int main() {
 
 //Function Declarations
 // Reads data into parallel arrays and returns the actual count
-int readData(string names[], double scores[][NUMTESTS], string filename) {
+int readData(string names[], double scores[][NUMTESTS], string filename) 
+{
     ifstream inFile(filename);
     if (!inFile) return 0;
 
     int count = 0;
-    while (count < MAXSTUDENTS && inFile >> names[count]) {
-        for (int j = 0; j < NUMTESTS; j++) {
+    while (count < MAXSTUDENTS && inFile >> names[count]) 
+    {
+        for (int j = 0; j < NUMTESTS; j++) 
+        {
             inFile >> scores[count][j];
         }
         count++;
@@ -66,9 +69,11 @@ void Print(const string names[], const double scores[][NUMTESTS], int count) {
     cout << left << setw(15) << "Name" << setw(10) << "Average" << "Grade" << endl;
     cout << "-----------------------------------" << endl;
 
-    for (int i = 0; i < count; i++) {
+    for (int i = 0; i < count; i++) 
+    {
         double sum = 0;
-        for (int j = 0; j < NUMTESTS; j++) {
+        for (int j = 0; j < NUMTESTS; j++) 
+        {
             sum += scores[i][j];
         }
         double avg = sum / NUMTESTS;
